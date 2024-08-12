@@ -1,0 +1,169 @@
+/* src/styles/TimeTablePage.css */
+.timetable-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: #f8f9fa;
+    min-height: 100vh;
+  }
+  
+  .timetable-form, .timetable-list {
+    background: white;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 800px;
+    box-sizing: border-box;
+  }
+  
+  .timetable-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .timetable-form h1, .timetable-list h2 {
+    margin-bottom: 20px;
+    text-align: center;
+    color: #343a40;
+  }
+  
+  .timetable-form .form-group {
+    margin-bottom: 20px;
+    width: 100%;
+    position: relative;
+  }
+  
+  .timetable-form .form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #495057;
+  }
+  
+  .timetable-form .form-group input,
+  .timetable-form .form-group select,
+  .timetable-form .form-group textarea {
+    width: calc(100% - 40px);
+    padding: 8px;
+    box-sizing: border-box;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+  }
+  
+  .timetable-form .form-group input[type="checkbox"] {
+    width: auto;
+    margin-right: 10px;
+  }
+  
+  .timetable-form .form-group textarea {
+    resize: vertical;
+    height: 100px;
+  }
+  
+  .timetable-form button {
+    width: 100%;
+    padding: 10px 0;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 16px;
+    margin-top: 10px;
+  }
+  
+  .timetable-form button:hover {
+    background-color: #0056b3;
+  }
+  
+  .timetable-form .form-group button {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 50%;
+    font-size: 16px;
+    padding: 5px 10px;
+  }
+  
+  .timetable-form .form-group button:hover {
+    background-color: #0056b3;
+  }
+  
+  .timetable-list {
+    position: relative;
+  }
+  
+  .timetable-list table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  .timetable-list table th, .timetable-list table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+  }
+  
+  .timetable-list table th {
+    background-color: #f2f2f2;
+    color: #343a40;
+  }
+  
+  .back-button {
+    margin: 20px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    text-align: center;
+  }
+  
+  .back-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .lecture-group, .lab-group {
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    padding: 10px;
+    margin-bottom: 20px;
+    position: relative;
+    width: 100%;
+  }
+  
+  .lecture-group h3, .lab-group h3 {
+    margin-bottom: 10px;
+    color: #343a40;
+  }
+  
+  .add-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 50%;
+    font-size: 20px;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 0;
+  }
+  
+  .add-button:hover {
+    background-color: #0056b3;
+  }
+  

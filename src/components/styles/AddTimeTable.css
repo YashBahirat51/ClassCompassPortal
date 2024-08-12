@@ -1,0 +1,40 @@
+.timetable-card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .timetable-image {
+    max-height: 300px; /* Adjust this as needed */
+    object-fit: cover;
+    width: 100%;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .card-body {
+    padding: 15px;
+  }
+  
+  .card-title {
+    font-size: 1.25rem;
+    margin-bottom: 10px;
+  }
+  
+  .card-text {
+    font-size: 1rem;
+    color: #555;
+  }
+  
+  .container {
+    padding-top: 20px;
+  }
+  
+  .btn {
+    margin-bottom: 20px;
+  }
+  
+  .btn-danger {
+    margin-top: 10px;
+  }
+  

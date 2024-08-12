@@ -1,0 +1,120 @@
+/* src/styles/FacultyPage.css */
+.faculty-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: #f8f9fa;
+    min-height: 100vh;
+  }
+  
+  .faculty-form, .faculty-list {
+    background: white;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 800px; /* Center align form and list */
+    box-sizing: border-box; /* Ensure padding is included in width calculation */
+  }
+  
+  .faculty-form {
+    margin: 0 auto; /* Center horizontally */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .faculty-form h1, .faculty-list h2 {
+    margin-bottom: 20px;
+    text-align: center;
+    color: #343a40;
+  }
+  
+  .faculty-form .form-group {
+    margin-bottom: 20px;
+    width: 100%; /* Full width of the form */
+  }
+  
+  .faculty-form .form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #495057;
+  }
+  
+  .faculty-form .form-group input,
+  .faculty-form .form-group select {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+  }
+  
+  .faculty-form button {
+    width: 100%;
+    padding: 10px 0;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 16px;
+  }
+  
+  .faculty-form button:hover {
+    background-color: #0056b3;
+  }
+  
+  .faculty-list {
+    position: relative;
+  }
+  
+  .search-bar {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .search-bar input {
+    width: 100%;
+    max-width: 400px;
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: 16px;
+  }
+  
+  .faculty-list table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  .faculty-list table th, .faculty-list table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+  }
+  
+  .faculty-list table th {
+    background-color: #f2f2f2;
+    color: #343a40;
+  }
+  
+  .back-button {
+    margin: 20px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    text-align: center;
+  }
+  
+  .back-button:hover {
+    background-color: #0056b3;
+  }
+  

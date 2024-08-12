@@ -1,0 +1,15 @@
+/* src/styles/MessagesPage.css */
+.messages-page {
+    padding: 20px;
+    background-color: #f8f9fa;
+    min-height: 100vh;
+  }
+  
+  .messages-page h1 {
+    margin-bottom: 20px;
+  }
+  
+  .messages-page p {
+    margin: 0;
+  }
+  
