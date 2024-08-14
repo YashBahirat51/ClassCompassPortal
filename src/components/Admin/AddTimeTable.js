@@ -167,7 +167,7 @@ const AddTimetable = () => {
             <option value="PGDESD">PG-DESD</option>
             <option value="PGDBDA">PG-DBDA</option>
             <option value="PGDITISS">PG-DITISS</option>
-            <option value="PGDAI">PG-DAI</option><nav></nav>
+            <option value="PGDAI">PG-DAI</option>
             <option value="PGDVLSI">PG-DVLSI</option>
             <option value="PGDHPCSA">PG-DHPCSA</option>
             <option value="PGHPCAP">PG-HPCAP</option>

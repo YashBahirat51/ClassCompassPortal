@@ -12,9 +12,11 @@ const StudentSidebar = ({ url, handleLogout }) => {
         <li><Link to={`${url}/profile`}>Profile</Link></li>
         <li><Link to={`${url}/timetable`}>View Timetable</Link></li>
         <li><Link to={`${url}/notice`}>View Notice</Link></li>
+        
+        <li><Link to={`${url}/viewresult`}>View Result</Link></li>
         <li><Link to={`${url}/resources`}>View Resources</Link></li>
         <li><Link to={`${url}/assignments`}>Assignments</Link></li>
-        <li><Link to={`${url}/messages`}>Messages</Link></li>
+        <li><Link to={`${url}/attendance`}>Attendance</Link></li>
         <li><button onClick={handleLogout}>Logout</button></li>
           
       </ul>

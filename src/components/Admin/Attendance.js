@@ -3,20 +3,20 @@ import axios from 'axios';
 
 const BASE_URL = 'http://localhost:8080';
 
-const Resource = () => {
+const Attendance = () => {
   const [selectedDepartment, setSelectedDepartment] = useState('');
   const [subjects, setSubjects] = useState([]);
   const [selectedSubject, setSelectedSubject] = useState('');
-  const [resourceFile, setResourceFile] = useState(null);
-  const [resourceName, setResourceName] = useState('');
-  const [resources, setResources] = useState([]);
+  const [attendanceFile, setAttendanceFile] = useState(null);
+  const [attendanceName, setAttendanceName] = useState('');
+  const [attendances, setAttendances] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     if (selectedDepartment) {
       fetchSubjects(selectedDepartment);
     }
-    fetchAllResources();
+    fetchAllAttendances();
   }, [selectedDepartment]);
 
   const fetchSubjects = async (departmentId) => {
@@ -29,12 +29,12 @@ const Resource = () => {
     }
   };
 
-  const fetchAllResources = async () => {
+  const fetchAllAttendances = async () => {
     try {
-      const response = await axios.get(`${BASE_URL}/api/resources`);
-      setResources(response.data);
+      const response = await axios.get(`${BASE_URL}/api/attendance`);
+      setAttendances(response.data);
     } catch (error) {
-      console.error('Failed to fetch resources:', error);
+      console.error('Failed to fetch attendance:', error);
     }
   };
 
@@ -48,58 +48,58 @@ const Resource = () => {
   };
 
   const handleFileChange = (e) => {
-    setResourceFile(e.target.files[0]);
+    setAttendanceFile(e.target.files[0]);
   };
 
   const handleNameChange = (e) => {
-    setResourceName(e.target.value);
+    setAttendanceName(e.target.value);
   };
 
-  const handleDeleteResource = async (resourceId) => {
+  const handleDeleteAttendance = async (attendanceId) => {
     try {
-      await axios.delete(`${BASE_URL}/api/resources/${resourceId}`);
-      alert('Resource deleted successfully!');
-      fetchAllResources(); // Refresh the resources list after deletion
+      await axios.delete(`${BASE_URL}/api/attendance/${attendanceId}`);
+      alert('Attendance deleted successfully!');
+      fetchAllAttendances(); // Refresh the attendance list after deletion
     } catch (error) {
-      console.error('Failed to delete resource:', error);
-      alert('Failed to delete resource.');
+      console.error('Failed to delete attendance:', error);
+      alert('Failed to delete attendance.');
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!selectedDepartment || !selectedSubject || !resourceFile || !resourceName) {
-      alert('Please select a department, subject, resource file, and enter a resource name.');
+    if (!selectedDepartment || !selectedSubject || !attendanceFile || !attendanceName) {
+      alert('Please select a department, subject, attendance file, and enter an attendance name.');
       return;
     }
 
     const formData = new FormData();
     formData.append('departmentId', selectedDepartment);
     formData.append('subjectId', selectedSubject);
-    formData.append('resourceFile', resourceFile);
-    formData.append('name', resourceName);
+    formData.append('file', attendanceFile);
+    formData.append('name', attendanceName);
 
     try {
-      await axios.post(`${BASE_URL}/api/resources`, formData, {
+      await axios.post(`${BASE_URL}/api/attendance`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
-      alert('Resource uploaded successfully!');
-      fetchAllResources(); // Refresh the resources list after upload
+      alert('Attendance uploaded successfully!');
+      fetchAllAttendances(); // Refresh the attendance list after upload
     } catch (error) {
-      console.error('Failed to upload resource:', error);
-      alert('Failed to upload resource.');
+      console.error('Failed to upload attendance:', error);
+      alert('Failed to upload attendance.');
     }
   };
 
-  const filteredResources = resources.filter(resource =>
-    resource.fileName.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredAttendances = attendances.filter(attendance =>
+    attendance.fileName.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
     <div>
-      <h3>Upload Resource</h3>
+      <h3>Upload Monthly Attendance</h3>
       <form onSubmit={handleSubmit}>
         <div>
           <label>Department:</label>
@@ -121,25 +121,25 @@ const Resource = () => {
         </div>
 
         <div>
-          <label>Resource Name:</label>
-          <input type="text" value={resourceName} onChange={handleNameChange} />
+          <label>Attendance Name:</label>
+          <input type="text" value={attendanceName} onChange={handleNameChange} />
         </div>
 
         <div>
-          <label>Resource File:</label>
+          <label>Attendance File:</label>
           <input type="file" onChange={handleFileChange} />
         </div>
 
-        <button type="submit">Upload Resource</button>
+        <button type="submit">Upload Attendance</button>
       </form>
 
-      <h3>Available Resources</h3>
+      <h3>Available Attendance Files</h3>
       
       <div>
         <label>Search by File Name:</label>
         <input
           type="text"
-          placeholder="Search resources"
+          placeholder="Search attendance"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
@@ -154,12 +154,12 @@ const Resource = () => {
           </tr>
         </thead>
         <tbody>
-          {filteredResources.map(resource => (
-            <tr key={resource.id}>
-              <td>{resource.fileName}</td>
-              <td>{resource.fileType}</td>
+          {filteredAttendances.map(attendance => (
+            <tr key={attendance.id}>
+              <td>{attendance.fileName}</td>
+              <td>{attendance.fileType}</td>
               <td>
-                <button onClick={() => handleDeleteResource(resource.id)}>Delete</button>
+                <button onClick={() => handleDeleteAttendance(attendance.id)}>Delete</button>
               </td>
             </tr>
           ))}
@@ -169,4 +169,4 @@ const Resource = () => {
   );
 };
 
-export default Resource;
+export default Attendance;

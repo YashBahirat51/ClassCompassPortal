@@ -189,7 +189,7 @@ const ViewResources = () => {
           <tr>
             <th>Name</th>
             <th>Subject</th>
-            <th>File</th> {/* File column for download */}
+            <th>File</th> 
           </tr>
         </thead>
         <tbody>

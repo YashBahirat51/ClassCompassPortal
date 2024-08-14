@@ -3,20 +3,20 @@ import axios from 'axios';
 
 const BASE_URL = 'http://localhost:8080';
 
-const Resource = () => {
+const Result = () => {
   const [selectedDepartment, setSelectedDepartment] = useState('');
   const [subjects, setSubjects] = useState([]);
   const [selectedSubject, setSelectedSubject] = useState('');
-  const [resourceFile, setResourceFile] = useState(null);
-  const [resourceName, setResourceName] = useState('');
-  const [resources, setResources] = useState([]);
+  const [resultFile, setResultFile] = useState(null);
+  const [resultName, setResultName] = useState('');
+  const [results, setResults] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     if (selectedDepartment) {
       fetchSubjects(selectedDepartment);
     }
-    fetchAllResources();
+    fetchAllResults();
   }, [selectedDepartment]);
 
   const fetchSubjects = async (departmentId) => {
@@ -29,12 +29,12 @@ const Resource = () => {
     }
   };
 
-  const fetchAllResources = async () => {
+  const fetchAllResults = async () => {
     try {
-      const response = await axios.get(`${BASE_URL}/api/resources`);
-      setResources(response.data);
+      const response = await axios.get(`${BASE_URL}/api/results`);
+      setResults(response.data);
     } catch (error) {
-      console.error('Failed to fetch resources:', error);
+      console.error('Failed to fetch results:', error);
     }
   };
 
@@ -48,58 +48,58 @@ const Resource = () => {
   };
 
   const handleFileChange = (e) => {
-    setResourceFile(e.target.files[0]);
+    setResultFile(e.target.files[0]);
   };
 
   const handleNameChange = (e) => {
-    setResourceName(e.target.value);
+    setResultName(e.target.value);
   };
 
-  const handleDeleteResource = async (resourceId) => {
+  const handleDeleteResult = async (resultId) => {
     try {
-      await axios.delete(`${BASE_URL}/api/resources/${resourceId}`);
-      alert('Resource deleted successfully!');
-      fetchAllResources(); // Refresh the resources list after deletion
+      await axios.delete(`${BASE_URL}/api/results/${resultId}`);
+      alert('Result deleted successfully!');
+      fetchAllResults(); // Refresh the results list after deletion
     } catch (error) {
-      console.error('Failed to delete resource:', error);
-      alert('Failed to delete resource.');
+      console.error('Failed to delete result:', error);
+      alert('Failed to delete result.');
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!selectedDepartment || !selectedSubject || !resourceFile || !resourceName) {
-      alert('Please select a department, subject, resource file, and enter a resource name.');
+    if (!selectedDepartment || !selectedSubject || !resultFile || !resultName) {
+      alert('Please select a department, subject, result file, and enter a result name.');
       return;
     }
 
     const formData = new FormData();
     formData.append('departmentId', selectedDepartment);
     formData.append('subjectId', selectedSubject);
-    formData.append('resourceFile', resourceFile);
-    formData.append('name', resourceName);
+    formData.append('file', resultFile);
+    formData.append('name', resultName);
 
     try {
-      await axios.post(`${BASE_URL}/api/resources`, formData, {
+      await axios.post(`${BASE_URL}/api/results`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
-      alert('Resource uploaded successfully!');
-      fetchAllResources(); // Refresh the resources list after upload
+      alert('Result uploaded successfully!');
+      fetchAllResults(); // Refresh the results list after upload
     } catch (error) {
-      console.error('Failed to upload resource:', error);
-      alert('Failed to upload resource.');
+      console.error('Failed to upload result:', error);
+      alert('Failed to upload result.');
     }
   };
 
-  const filteredResources = resources.filter(resource =>
-    resource.fileName.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredResults = results.filter(result =>
+    result.fileName.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
     <div>
-      <h3>Upload Resource</h3>
+      <h3>Upload Result</h3>
       <form onSubmit={handleSubmit}>
         <div>
           <label>Department:</label>
@@ -121,25 +121,25 @@ const Resource = () => {
         </div>
 
         <div>
-          <label>Resource Name:</label>
-          <input type="text" value={resourceName} onChange={handleNameChange} />
+          <label>Result Name:</label>
+          <input type="text" value={resultName} onChange={handleNameChange} />
         </div>
 
         <div>
-          <label>Resource File:</label>
+          <label>Result File:</label>
           <input type="file" onChange={handleFileChange} />
         </div>
 
-        <button type="submit">Upload Resource</button>
+        <button type="submit">Upload Result</button>
       </form>
 
-      <h3>Available Resources</h3>
+      <h3>Available Results</h3>
       
       <div>
         <label>Search by File Name:</label>
         <input
           type="text"
-          placeholder="Search resources"
+          placeholder="Search results"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
@@ -154,12 +154,12 @@ const Resource = () => {
           </tr>
         </thead>
         <tbody>
-          {filteredResources.map(resource => (
-            <tr key={resource.id}>
-              <td>{resource.fileName}</td>
-              <td>{resource.fileType}</td>
+          {filteredResults.map(result => (
+            <tr key={result.id}>
+              <td>{result.fileName}</td>
+              <td>{result.fileType}</td>
               <td>
-                <button onClick={() => handleDeleteResource(resource.id)}>Delete</button>
+                <button onClick={() => handleDeleteResult(result.id)}>Delete</button>
               </td>
             </tr>
           ))}
@@ -169,4 +169,4 @@ const Resource = () => {
   );
 };
 
-export default Resource;
+export default Result;

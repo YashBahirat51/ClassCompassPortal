@@ -100,9 +100,9 @@ export const deleteStudent = (id) => {
 //         },
 //     });
 // };
-export const fetchTimetable = () => {
-    return axios.get(`${BASE_URL}/timetables`);
-};
+// export const fetchTimetable = () => {
+//     return axios.get(`${BASE_URL}/timetables`);
+// };
 
 
 

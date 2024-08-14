@@ -9,7 +9,7 @@
         <relativePath /> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.example</groupId>
-    <artifactId>studentportalbackend</artifactId>
+    <artifactId>ClassCompassBackend</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>studentportalbackend</name>
     <description>EMS with E-R, patch mapping, custom annotation for validation, upload emp dtls n image, upload using requestpart, localdatetime</description>

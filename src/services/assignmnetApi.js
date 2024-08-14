@@ -28,7 +28,7 @@ export const addAssignment = async (assignment) => {
 };
 
 export const getAllAssignments = () => {
-    return axios.get(`${BASE_URL}`);
+    return axios.get(`http://localhost:8080/api/assignments`);
 };
 
 // Fetch all subjects (assuming there's an endpoint for this in `SubjectController`)

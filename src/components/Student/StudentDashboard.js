@@ -8,6 +8,9 @@ import ViewResources from './ViewResources';
 import Assignments from './Assignments';
 import Messages from './Messages';
 import StudentSidebar from './StudentSidebar';
+import ViewResults from './ViewResults';
+import Attendance from '../Admin/Attendance';
+import ViewAttendance from './ViewAttendance';
 
 const StudentDashboard = () => {
     let { path,url } = useRouteMatch();
@@ -28,9 +31,13 @@ const StudentDashboard = () => {
                     <Route path={`${path}/profile`} component={Profile} />
                     <Route path={`${path}/timetable`} component={ViewTimetable} />
                     <Route path={`${path}/notice`} component={ViewNotice} />
+                    
+                    <Route path={`${path}/viewresult`} component={ViewResults} />
                     <Route path={`${path}/resources`} component={ViewResources} />
+                    
+                    <Route path={`${path}/attenance`} component={Attendance} />
                     <Route path={`${path}/assignments`} component={Assignments} />
-                    <Route path={`${path}/messages`} component={Messages} />
+                    <Route path={`${path}/attendance`} component={ViewAttendance} />
                     <Route path={path} exact>
                         <h2>Welcome to your dashboard!</h2>
                     </Route>

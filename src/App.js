@@ -17,6 +17,9 @@ import ViewResources from './components/Student/ViewResources';
 import ViewTimetable from './components/Student/ViewTimetable';
 import Assignments from './components/Student/Assignments';
 import AssignmentDetails from './components/Student/AssignmentDetails';
+import ViewResults from './components/Student/ViewResults';
+import Attendance from './components/Admin/Attendance';
+import ViewAttendance from './components/Student/ViewAttendance';
 
 const App = () => (
     <Router>
@@ -29,8 +32,6 @@ const App = () => (
             <PrivateRoute path="/admin/dashboard" component={AdminDashboard} />
             <PrivateRoute path="/faculty/add-assignment" component={AddAssignment} />
             <PrivateRoute path="/faculty/notice" component={NoticePage} />
-            <PrivateRoute path="/faculty/messages" component={MessagesPage} />
-            <PrivateRoute path="/faculty/performance" component={StudentPerformancePage} />
 
             {/* Student Routes */}
             <PrivateRoute path="/student/dashboard" component={StudentDashboard} />
@@ -40,8 +41,8 @@ const App = () => (
             <PrivateRoute path="/student/timetable" component={ViewTimetable} />
             <PrivateRoute path="/student/assignments" component={Assignments} />
             <PrivateRoute path="/student/notice" component={NoticePage} />
-            <PrivateRoute path="/student/messages" component={MessagesPage} />
-            <PrivateRoute path="/student/performance" component={StudentPerformancePage} />
+            <PrivateRoute path="/student/attendance" component={ViewAttendance} />
+            
             <PrivateRoute path="/student/assignment-details/:id" component={AssignmentDetails} /> {/* New route */}
         </Switch>
     </Router>

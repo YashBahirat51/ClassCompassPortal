@@ -136,7 +136,7 @@ const AssignmentManagementPage = () => {
               assignments.map(assignment => (
                 <tr key={assignment.id}>
                   <td style={{ border: '1px solid black', padding: '8px' }}>{assignment.name}</td>
-                  <td style={{ border: '1px solid black', padding: '8px' }}>{assignment.subject ? assignment.subject.name : 'No Subject'}</td>
+                  <td style={{ border: '1px solid black', padding: '8px' }}>{assignment.subjectName ? assignment.subjectName : 'No Subject'}</td>
                   <td style={{ border: '1px solid black', padding: '8px' }}>{new Date(assignment.deadline).toLocaleDateString()}</td>
                   <td style={{ border: '1px solid black', padding: '8px' }}>
                     <button onClick={() => handleDelete(assignment.id)}>Delete</button>
