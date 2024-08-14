@@ -46,6 +46,12 @@ public class ResourceDTO {
 		this.subjectName = subjectName;
 	}
 
+    public ResourceDTO(String id, String filename, String fileType, String subjectName) {
+        this.id = id;
+        this.fileName = filename;
+        this.fileType = fileType;
+        this.subjectName = subjectName;
+    }
 
 	public void setFilesize(long filesize) {
 		this.filesize = filesize;

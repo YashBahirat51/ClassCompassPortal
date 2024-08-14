@@ -13,6 +13,7 @@ import com.app.dao.SubjectRepository;
 import com.app.dto.SubjectDTO;
 import com.app.entities.Subject;
 import com.app.mapper.DepartmentMapper;
+import com.app.mapper.SubjectMapper;
 
 @Service
 public class SubjectService {
@@ -22,6 +23,8 @@ public class SubjectService {
 
     @Autowired
     DepartmentMapper departmentMapper;
+    @Autowired
+    SubjectMapper mapper;
     
     @Autowired
     private ModelMapper modelMapper; // Or use manual mapping
@@ -29,7 +32,7 @@ public class SubjectService {
     public List<SubjectDTO> getAllSubjects() {
         List<Subject> subjects = subjectRepository.findAll();
         return subjects.stream()
-                .map(subject -> modelMapper.map(subject, SubjectDTO.class))
+                .map(subject ->mapper.toDTO(subject))
                 .collect(Collectors.toList());
     }
 

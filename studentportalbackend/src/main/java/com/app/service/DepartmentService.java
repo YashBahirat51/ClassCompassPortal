@@ -1,7 +1,9 @@
 package com.app.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,13 +19,15 @@ public class DepartmentService {
     private DepartmentRepository departmentRepository;
 
     @Autowired
+    ModelMapper mapper;
+    @Autowired
     DepartmentMapper departmentMapper;
     public Department saveDepartment(Department department) {
         return departmentRepository.save(department);
     }
 
-    public List<Department> getAllDepartments() {
-        return departmentRepository.findAll();
+    public List<DepartmentDTO> getAllDepartments() {
+        return departmentRepository.findAll().stream().map(dept->departmentMapper.toDTO(dept)).collect(Collectors.toList());
     }
 
 //    public Department getDepartmentById(Long id) {

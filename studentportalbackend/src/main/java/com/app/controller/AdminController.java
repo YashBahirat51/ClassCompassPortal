@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -17,18 +16,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.app.dto.StudentDTO;
 import com.app.dto.TimetableDTO;
 import com.app.entities.Admin;
-import com.app.entities.Attendance;
-import com.app.entities.DailyAttendanceSheet;
-import com.app.entities.Department;
-import com.app.entities.Faculty;
 import com.app.entities.Notice;
-import com.app.entities.Student;
 import com.app.service.AdminService;
 import com.app.service.AttendanceService;
-import com.app.service.DailyAttendanceSheetService;
 import com.app.service.FacultyService;
 import com.app.service.NoticeService;
 import com.app.service.StudentService;
@@ -49,8 +41,6 @@ public class AdminController {
     @Autowired
     private AttendanceService attendanceService;
 
-    @Autowired
-    private DailyAttendanceSheetService dailyAttendanceSheetService;
    
     @Autowired
     private TimetableService timetableService;
@@ -123,14 +113,7 @@ public class AdminController {
     
     
    
-    @PostMapping("/mark-attendance")
-    public ResponseEntity<DailyAttendanceSheet> markAttendance(
-            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date,
-            @RequestBody List<Attendance> attendances) {
-        List<Attendance> savedAttendances = attendanceService.saveAllAttendances(attendances);
-        DailyAttendanceSheet dailySheet = dailyAttendanceSheetService.createOrUpdateDailySheet(date, savedAttendances);
-        return ResponseEntity.ok(dailySheet);
-    }
+    
     @PostMapping("/register")
     public ResponseEntity<Admin> registerAdmin(@RequestBody Admin admin) {
         Admin savedAdmin = adminService.saveAdmin(admin);
@@ -146,10 +129,10 @@ public class AdminController {
     
 
     
-    @GetMapping("/students")
-    public List<Student> getAllStudents() {
-        return studentService.getAllStudents();
-    }
+//    @GetMapping("/students")
+//    public List<Student> getAllStudents() {
+//        return studentService.getAllStudents();
+//    }
     @DeleteMapping("/timetables/{id}")
     public ResponseEntity<?> deleteTimetable(@PathVariable Long id) {
         boolean isDeleted = timetableService.deleteTimetableById(id);

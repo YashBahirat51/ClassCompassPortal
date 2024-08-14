@@ -36,6 +36,13 @@ public class NoticeService {
 	        return notices.stream().map(this::convertToDTO).collect(Collectors.toList());
 	    }
 
+	 public void deleteNoticeById(Long id) {
+	        if (noticeRepository.existsById(id)) {
+	            noticeRepository.deleteById(id);
+	        } else {
+	            throw new RuntimeException("Notice with id " + id + " not found");
+	        }
+	    }
 	    private NoticeDTO convertToDTO(Notice notice) {
 	        NoticeDTO noticeDTO = new NoticeDTO();
 	        noticeDTO.setId(notice.getId());

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -35,5 +36,14 @@ public class NoticeController {
     @GetMapping("byDepartment/{department}")
     public List<NoticeDTO> getNoticesByDepartment(@PathVariable String department) {
         return noticeService.getNoticesByDepartment(department);
+    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteNotice(@PathVariable Long id) {
+        try {
+            noticeService.deleteNoticeById(id);
+            return ResponseEntity.ok("Notice deleted successfully");
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(404).body(e.getMessage());
+        }
     }
 }

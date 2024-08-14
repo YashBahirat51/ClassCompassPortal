@@ -33,62 +33,19 @@ public class AssignmentController {
 
     // Endpoint to get all assignments
     @GetMapping
-    public ResponseEntity<List<Assignment>> getAllAssignments() {
-        List<Assignment> assignments = assignmentService.getAllAssignments();
+    public ResponseEntity<List<AssignmentDTO>> getAllAssignments() {
+        List<AssignmentDTO> assignments = assignmentService.getAllAssignments();
         return new ResponseEntity<>(assignments, HttpStatus.OK);
     }
 
-//    @PostMapping
-//    public ResponseEntity<Assignment> createAssignment(
-//            @RequestParam String name,
-//            @RequestParam String deadline,
-//            @RequestParam String question,
-//            @RequestParam long subjectId) {
-//        try {
-//            System.out.println("Received deadline string: " + deadline);
-//            System.out.println(name+" "+question);
-//            // Validate and trim any extra whitespace or commas
-//            String trimmedDeadline = deadline.split(",")[0].trim();
-//            LocalDate localDate = LocalDate.parse(trimmedDeadline); // Expects yyyy-MM-dd format
-//            
-//            System.out.println("Parsed LocalDate: " + localDate);
-//            
-//            Subject subject = subjectService.getSubjectById(subjectId);
-//
-//            Assignment assignment = new Assignment();
-//            assignment.setName(name);
-//            assignment.setDeadline(localDate);
-//            assignment.setQuestion(question);
-//            assignment.setSubject(subject);
-//
-//            Assignment savedAssignment = assignmentService.saveAssignment(assignment);
-//
-//            return new ResponseEntity<>(savedAssignment, HttpStatus.CREATED);
-//        } catch (DateTimeParseException e) {
-//            System.err.println("DateTimeParseException: " + e.getMessage());
-//            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-//        }
-//    }
+//   
     @PostMapping
-    public ResponseEntity<Assignment> createAssignment(@RequestBody AssignmentRequest request) {
+    public ResponseEntity<AssignmentDTO> createAssignment(@RequestBody AssignmentRequest request) {
         try {
             // Parse the deadline string into a LocalDate
-            LocalDate localDate = LocalDate.parse(request.getDeadline());
+           
 
-            // Fetch the subject by its ID
-            Subject subject = subjectService.getSubjectById(request.getSubjectId());
-
-            // Create and populate the Assignment object
-            Assignment assignment = new Assignment();
-            assignment.setName(request.getName());
-            assignment.setDeadline(localDate);
-            assignment.setQuestion(request.getQuestion());
-            assignment.setSubject(subject);
-
-            // Save the assignment and return the response
-            Assignment savedAssignment = assignmentService.saveAssignment(assignment);
-
-            return new ResponseEntity<>(savedAssignment, HttpStatus.CREATED);
+            return new ResponseEntity<>(assignmentService.createAssignment(request), HttpStatus.CREATED);
         } catch (DateTimeParseException e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }

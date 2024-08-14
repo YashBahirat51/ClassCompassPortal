@@ -52,7 +52,7 @@ public class StudentController {
 
     
     @GetMapping("/all")
-    public ResponseEntity<List<Student>> getAllStudents() {
+    public ResponseEntity<List<StudentDTO>> getAllStudents() {
         return ResponseEntity.ok(studentService.getAllStudents());
     }
 

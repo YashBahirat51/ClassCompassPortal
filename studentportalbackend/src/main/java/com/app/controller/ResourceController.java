@@ -1,14 +1,15 @@
 package com.app.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
-import org.springframework.http.ContentDisposition;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -50,39 +51,7 @@ public class ResourceController {
     
     }
     
-//    @GetMapping("/download/{fileid}")
-//    public ResponseEntity<org.springframework.core.io.Resource> downloadFile(@PathVariable Long fileid)
-//    {
-//    	Resource attachment=null;
-//    	attachment=resourceService.getAttachment(fileid);
-//    	return ResponseEntity.ok()
-//    			.contentType(MediaType.parseMediaType(attachment.getFileType())).
-//    			header(HttpHeaders.CONTENT_DISPOSITION,"attachment; filename=\""+attachment.getFilename()+"\"")
-//    			.body(new ByteArrayResource(attachment.getData()));
-//    }
-//    @GetMapping("/download/{fileId}")
-//    public ResponseEntity<org.springframework.core.io.Resource> downloadFile(@PathVariable String fileId) {
-//        // Fetch the resource attachment by ID
-//        Resource attachment = resourceService.getAttachment(fileId);
-//        
-//        // Check if the attachment was found
-//        if (attachment == null) {
-//            // Return a 404 Not Found status if the attachment does not exist
-//            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-//        }
-//        
-//        // Create a ByteArrayResource from the attachment data
-//        ByteArrayResource resource = new ByteArrayResource(attachment.getData());
-//        
-//        // Set the content type based on the file type of the attachment
-//        MediaType contentType = MediaType.parseMediaType(attachment.getFileType());
-//        
-//        // Build the response with the attachment content and appropriate headers
-//        return ResponseEntity.ok()
-//                .contentType(contentType)
-//                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + attachment.getFilename() + "\"")
-//                .body(resource);
-//    }
+//   
     @GetMapping("/download/{fileId}")
     public ResponseEntity<org.springframework.core.io.Resource> downloadFile(@PathVariable String fileId) {
         // Fetch the resource attachment by ID
@@ -115,28 +84,22 @@ public class ResourceController {
         System.out.println("Fetching resources for department ID: " + departmentId);
         List<ResourceDTO> resources = resourceService.getResourcesByDepartment(departmentId);
         if (resources == null || resources.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build(); // Return 404 if no resources found
+            return ResponseEntity.ok(new ArrayList<ResourceDTO>()); // Return 404 if no resources found
         }
         return ResponseEntity.ok(resources);
     }
-//    @GetMapping("/byDepartment/{departmentId}")
-//    public ResponseEntity<List<ResourceDTO>> getResourcesByDepartment(@PathVariable Long departmentId) {
-//        System.out.println("in resource ctlr");
-//    	List<ResourceDTO> resources = resourceService.getResourcesByDepartment(departmentId);
-//        return ResponseEntity.ok(resources);
-//    }
-//    @GetMapping("/download/{id}")
-//    public ResponseEntity<byte[]> downloadResource(@PathVariable Long id) {
-//        ResourceDTO resourceDTO = resourceService.getResourceById(id);
-//        if (resourceDTO == null) {
-//            return ResponseEntity.notFound().build();
-//        }
-//
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.setContentDisposition(ContentDisposition.builder("attachment")
-//                .filename(resourceDTO.getFileName())
-//                .build());
-//
-//        return new ResponseEntity<>(resourceDTO.getData(), headers, HttpStatus.OK);
-//    }
+    @GetMapping
+    public ResponseEntity<List<ResourceDTO>> getAllResources() {
+        List<ResourceDTO> resources = resourceService.getAllResources();
+        if (resources.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(resources);
+    }
+
+    @DeleteMapping("/{resourceId}")
+    public ResponseEntity<Void> deleteResource(@PathVariable String resourceId) {
+        resourceService.deleteResource(resourceId);
+        return ResponseEntity.noContent().build(); // Return 204 No Content after successful deletion
+    }
 }

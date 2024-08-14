@@ -1,5 +1,6 @@
 package com.app.service;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -46,8 +47,9 @@ public class StudentService {
 
         return studentRepository.save(existingStudent);
     }
-    public List<Student> getAllStudents() {
-        return studentRepository.findAll();
+    public List<StudentDTO> getAllStudents() {
+        return studentRepository.findAll().stream().map(student->studentMapper.toDTO(student)).collect(Collectors.toList());
+        
     }
 
     public Student getStudentByPrnno(String prnno) {

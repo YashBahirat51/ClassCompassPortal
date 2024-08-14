@@ -28,7 +28,7 @@ public class FacultyService {
 	@Autowired
 	private ModelMapper modelMapper;
 	
- public Faculty saveFaculty(String fname, String lname, String email, String password, Long departmentId, Long subjectId) {
+ public void saveFaculty(String fname, String lname, String email, String password, Long departmentId, Long subjectId) {
     Department department = departmentRepository.findById(departmentId)
             .orElseThrow(() -> new RuntimeException("Department not found"));
     Subject subject = subjectRepository.findById(subjectId)
@@ -41,8 +41,8 @@ public class FacultyService {
     faculty.setPassword(password);
     faculty.setDepartment(department);
     faculty.setSubject(subject);
+     facultyRepository.save(faculty);
 
-    return facultyRepository.save(faculty);
 }
 //	public Faculty saveFaculty(FacultyDTO facultyDTO) {
 //        Faculty faculty = new Faculty();
@@ -130,7 +130,7 @@ public class FacultyService {
 //        }
 //        return null;
 //    }
-    public Faculty updateFaculty(Long id, FacultyDTO facultyDTO) {
+    public FacultyDTO updateFaculty(Long id, FacultyDTO facultyDTO) {
         // Check if the Faculty with the given id exists
         Optional<Faculty> facultyOpt = facultyRepository.findById(id);
         if (facultyOpt.isPresent()) {
@@ -158,8 +158,9 @@ public class FacultyService {
                 subjectOpt.ifPresent(faculty::setSubject);
             }
 
+            
             // Save and return the updated Faculty entity
-            return facultyRepository.save(faculty);
+            return modelMapper.map(facultyRepository.save(faculty),FacultyDTO.class);
         } else {
             // Handle the case when the Faculty with the given id does not exist
             throw new RuntimeException("Faculty not found with id: " + id);

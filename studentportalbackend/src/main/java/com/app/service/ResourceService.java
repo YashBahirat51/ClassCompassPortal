@@ -121,4 +121,17 @@ public class ResourceService {
 		
 		return resourceRepository.findById(fileid).orElse(null);
 	}
+	public List<ResourceDTO> getAllResources() {
+        return resourceRepository.findAll().stream()
+                .map(resource -> new ResourceDTO(
+                        resource.getId(),
+                        resource.getFilename(),
+                        resource.getFileType(),
+                        resource.getSubject().getName()))
+                .collect(Collectors.toList());
+    }
+
+    public void deleteResource(String resourceId) {
+        resourceRepository.deleteById(resourceId);
+    }
 }

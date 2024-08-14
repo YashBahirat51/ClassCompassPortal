@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,11 +17,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.app.custom_exceptions.ApiException;
+import com.app.dto.ApiResponse;
 import com.app.dto.FacultyDTO;
 import com.app.entities.Assignment;
 import com.app.entities.Faculty;
 import com.app.service.AssignmentService;
 import com.app.service.FacultyService;
+
 
 @RestController
 @RequestMapping("/api/faculties")
@@ -74,9 +78,8 @@ public class FacultyController {
 
         return new ResponseEntity<>(savedAssignment, HttpStatus.CREATED);
     }
-    
     @PostMapping("/add")
-    public ResponseEntity<Faculty> addFaculty(
+    public ResponseEntity<?> addFaculty(
             @RequestParam("fname") String fname,
             @RequestParam("lname") String lname,
             @RequestParam("email") String email,
@@ -85,11 +88,14 @@ public class FacultyController {
             @RequestParam("subjectId") Long subjectId) {
 
         try {
-            Faculty faculty = facultyService.saveFaculty(fname, lname, email, password, departmentId, subjectId);
-            return ResponseEntity.ok(faculty);
+            facultyService.saveFaculty(fname, lname, email, password, departmentId, subjectId);
+            return ResponseEntity.ok(201);
+        } catch (DataIntegrityViolationException e) {
+            // Handle the case where a duplicate email is being inserted
+            return ResponseEntity.status(409).body("Error: Email already in use.");
         } catch (Exception e) {
-            e.printStackTrace();
-            return ResponseEntity.status(500).body(null);
+            // Handle other exceptions
+            return ResponseEntity.status(500).body(new ApiException("Duplicate Email..."));
         }
     }
 //    @PutMapping("/update/{id}")
@@ -101,23 +107,23 @@ public class FacultyController {
 //            return ResponseEntity.notFound().build();
 //        }
 //    }
-    @PutMapping("/{id}")
+    @PutMapping(value="/{id}", produces = "application/json")
     public ResponseEntity<?> updateFaculty(
             @PathVariable("id") Long id,
             @RequestBody FacultyDTO facultyDTO) {
     	 // Validate input
         if (id == null || facultyDTO == null) {
-        	 return ResponseEntity.badRequest().body("Invalid input");
+        	 return ResponseEntity.badRequest().body(new ApiResponse("Invalid input"));
         }
 
         try {
             // Convert DTO to entity and update
-            Faculty updatedFaculty = facultyService.updateFaculty(id, facultyDTO);
+            FacultyDTO updatedFaculty = facultyService.updateFaculty(id, facultyDTO);
             return ResponseEntity.ok(updatedFaculty);
         } catch (Exception e) {
             // Handle errors and exceptions
             System.out.println(e.getMessage());
-        	return ResponseEntity.status(500).body("Error updating faculty: " + e.getMessage());
+        	return ResponseEntity.status(500).body(new ApiResponse("Error updating faculty: " + e.getMessage()));
         }
     }
 

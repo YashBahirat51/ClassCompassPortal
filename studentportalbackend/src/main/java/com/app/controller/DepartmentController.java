@@ -36,7 +36,7 @@ public class DepartmentController {
         return departmentService.getDepartmentById(id);
     }
     @GetMapping
-    public List<Department> getAllDepartments() {
+    public List<DepartmentDTO> getAllDepartments() {
         return departmentService.getAllDepartments();
     }
 }
