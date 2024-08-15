@@ -35,8 +35,7 @@ public class WebConfig implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
         .allowedOrigins("http://localhost:3000") // Adjust according to your frontend URL
-        .allowedOrigins("http://localhost:3001") // Adjust according to your frontend URL
-        .allowedMethods("*")
+       .allowedMethods("*")
                 .allowCredentials(true);
     }
 }

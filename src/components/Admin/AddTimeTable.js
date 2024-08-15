@@ -102,7 +102,7 @@ const AddTimetable = () => {
   };
 
   const filteredTimetables = timetables.filter(timetable => 
-    selectedDeptFilter === 'none' || timetable.dept === selectedDeptFilter
+    selectedDeptFilter === 'none' || timetable.dept == selectedDeptFilter
   );
 
   return (
@@ -163,16 +163,16 @@ const AddTimetable = () => {
           <label htmlFor="filterDeptSelect">Filter by Department:</label>
           <select id="filterDeptSelect" className="form-control" value={selectedDeptFilter} onChange={handleDeptFilterChange}>
             <option value="none">Select All</option>
-            <option value="PGDAC">PG-DAC</option>
-            <option value="PGDESD">PG-DESD</option>
-            <option value="PGDBDA">PG-DBDA</option>
-            <option value="PGDITISS">PG-DITISS</option>
-            <option value="PGDAI">PG-DAI</option>
-            <option value="PGDVLSI">PG-DVLSI</option>
-            <option value="PGDHPCSA">PG-DHPCSA</option>
-            <option value="PGHPCAP">PG-HPCAP</option>
-            <option value="PGDIOT">PG-DIOT</option>
-            <option value="PGDUASP">PG-DUASP</option>
+            <option value="DAC">PG-DAC</option>
+            <option value="DESD">PG-DESD</option>
+            <option value="DBDA">PG-DBDA</option>
+            <option value="DITISS">PG-DITISS</option>
+            <option value="DAI">PG-DAI</option>
+            <option value="DVLSI">PG-DVLSI</option>
+            <option value="DHPCSA">PG-DHPCSA</option>
+            <option value="HPCAP">PG-HPCAP</option>
+            <option value="DIOT">PG-DIOT</option>
+            <option value="DUASP">PG-DUASP</option>
           </select>
         </div>
 
