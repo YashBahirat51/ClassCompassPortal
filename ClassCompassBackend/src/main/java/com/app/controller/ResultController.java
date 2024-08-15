@@ -91,7 +91,7 @@ public class ResultController {
     public ResponseEntity<String> uploadResult(
         @RequestParam Long subjectId,
         @RequestParam String name,
-        @RequestParam("resultFile") MultipartFile resultFile) throws Exception {
+        @RequestParam("file") MultipartFile resultFile) throws Exception {
         
         Result result = resultService.saveResult(name, subjectId, resultFile);
         

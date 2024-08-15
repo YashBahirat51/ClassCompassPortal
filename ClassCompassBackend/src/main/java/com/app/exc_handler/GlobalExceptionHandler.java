@@ -4,8 +4,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import javax.naming.AuthenticationException;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -60,4 +63,25 @@ public class GlobalExceptionHandler {
 		e.printStackTrace();
 		return new ApiResponse(e.getMessage());
 	}
+	
+	@ExceptionHandler(BadCredentialsException.class)
+	@ResponseStatus(value = HttpStatus.UNAUTHORIZED)
+	public ResponseEntity<String> handleBadCredentialsException(BadCredentialsException e) {
+		System.err.println("in catch-all " + e);
+//		e.printStackTrace();
+		return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
+	}
+	
+	@ExceptionHandler(AuthenticationException.class)
+	@ResponseStatus(value = HttpStatus.UNAUTHORIZED)
+	public ResponseEntity<String> handleAuthenticationException(AuthenticationException e) {
+		System.err.println("in catch-all " + e);
+//		e.printStackTrace();
+		return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authentication failed: " + e.getMessage());
+	}
+	
+	@ExceptionHandler(Exception.class)
+    public ResponseEntity<String> handleException(Exception e) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+    }
 }

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.app.dto.TimetableDTO;
 import com.app.entities.Timetable;
 import com.app.service.TimetableService;
 
@@ -23,6 +24,11 @@ public class TimetableController {
         List<Timetable> timetables = timetableService.getTimetablesByDept(dept);
         
         System.out.println(timetables.get(0).getTimetableImage());
+        return ResponseEntity.ok(timetables);
+    }
+    @GetMapping
+    public ResponseEntity<List<TimetableDTO>> getAllTimetables() {
+        List<TimetableDTO> timetables = timetableService.getAllTimetables();
         return ResponseEntity.ok(timetables);
     }
 }

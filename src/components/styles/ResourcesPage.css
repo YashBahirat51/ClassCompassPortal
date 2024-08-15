@@ -1,0 +1,125 @@
+/* src/styles/ResourcePage.css */
+
+.resource-page {
+    padding: 20px;
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa;
+  }
+  
+  .resource-form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .resource-form-container h3 {
+    color: #007bff;
+    margin-bottom: 20px;
+  }
+  
+  .resource-form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .resource-form .form-group {
+    margin-bottom: 15px;
+    width: 100%;
+  }
+  
+  .resource-form label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+  }
+  
+  .resource-form select, 
+  .resource-form input[type="text"],
+  .resource-form input[type="file"] {
+    width: 100%;
+    max-width: 400px; /* Adjust max-width to make the inputs smaller */
+    padding: 8px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+  
+  .resource-form button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+  }
+  
+  .resource-form button:hover {
+    background-color: #0056b3;
+  }
+  
+  .resource-table-container {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .resource-table-container h3 {
+    color: #007bff;
+    margin-bottom: 20px;
+  }
+  
+  .resource-table-container table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .resource-table-container table th,
+  .resource-table-container table td {
+    border: 1px solid #dee2e6;
+    padding: 10px;
+    text-align: left;
+  }
+  
+  .resource-table-container table th {
+    background-color: #007bff;
+    color: #ffffff;
+  }
+  
+  .resource-table-container table td {
+    background-color: #ffffff;
+  }
+  
+  .resource-table-container table tr:nth-child(even) td {
+    background-color: #f8f9fa;
+  }
+  
+  .search-bar {
+    margin-bottom: 20px;
+    padding: 10px;
+    max-width: 400px;
+    background-color: #ffffff;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .search-bar input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+  

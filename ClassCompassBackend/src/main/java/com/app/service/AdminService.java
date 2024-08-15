@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.app.dao.AdminRepository;
 import com.app.entities.Admin;
+import com.app.entities.Role;
 
 @Service
 public class AdminService {
@@ -19,7 +20,8 @@ public class AdminService {
     public Admin saveAdmin(Admin admin) {
         // Assuming you want to save the plain password
         // If you want to still encode passwords, consider using another library or custom encoding
-        return adminRepository.save(admin);
+        admin.setRole(Role.ROLE_ADMIN);
+    	return adminRepository.save(admin);
     }
 
     public Admin getAdminByEmail(String email) {

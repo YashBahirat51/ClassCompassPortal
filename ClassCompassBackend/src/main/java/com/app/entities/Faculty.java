@@ -10,6 +10,8 @@ import javax.validation.constraints.Size;
 @Table(name = "faculties")
 public class Faculty {
 
+	
+	
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -30,6 +32,8 @@ public class Faculty {
     @NotBlank
     private String password;
 
+    
+    
     @OneToOne
     @JoinColumn(name = "subject_id", referencedColumnName = "id")
     private Subject subject;

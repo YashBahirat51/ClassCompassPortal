@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { addStudent } from '../../services/studentApi';
+import '../styles/AddStudent.css'; // Import CSS for styling
 
 const AddStudent = ({ onAdd }) => {
   const [form, setForm] = useState({
@@ -10,7 +11,7 @@ const AddStudent = ({ onAdd }) => {
     email: '',
     password: '',
     image: null,
-    department: '' // Added deptId field
+    department: ''
   });
   const history = useHistory();
 
@@ -29,21 +30,6 @@ const AddStudent = ({ onAdd }) => {
     });
   };
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   try {
-  //     await addStudent(form);
-  //     alert('Student added successfully!');
-  //     if (onAdd) {
-  //       onAdd(); // Refresh student list
-  //     }
-  //     history.push('/admin/dashboard/students'); // Redirect to the correct path
-  //   } catch (error) {
-  //     console.error('Failed to add student:', error);
-  //     alert('Failed to add student.');
-  //   }
-  // };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -56,23 +42,23 @@ const AddStudent = ({ onAdd }) => {
       if (form.image) formData.append('image', form.image);
       formData.append('department', form.department);
 
-      await addStudent(formData); // Use POST for adding a new student
+      await addStudent(formData);
       alert('Student added successfully!');
       if (onAdd) {
-        onAdd(); // Refresh student list
+        onAdd(); 
       }
-      history.push('/admin/dashboard/students'); // Redirect to the correct path
+      history.push('/admin/dashboard/students');
     } catch (error) {
       console.error('Failed to add student:', error);
       alert('Failed to add student.');
     }
-};
+  };
 
   return (
-    <div>
+    <div className="add-student-container">
       <h3>Add Student</h3>
-      <form onSubmit={handleSubmit}>
-        <div>
+      <form onSubmit={handleSubmit} className="add-student-form">
+        <div className="form-group">
           <label>PRN Number</label>
           <input
             type="text"
@@ -82,7 +68,7 @@ const AddStudent = ({ onAdd }) => {
             required
           />
         </div>
-        <div>
+        <div className="form-group">
           <label>First Name</label>
           <input
             type="text"
@@ -92,7 +78,7 @@ const AddStudent = ({ onAdd }) => {
             required
           />
         </div>
-        <div>
+        <div className="form-group">
           <label>Last Name</label>
           <input
             type="text"
@@ -102,7 +88,7 @@ const AddStudent = ({ onAdd }) => {
             required
           />
         </div>
-        <div>
+        <div className="form-group">
           <label>Email</label>
           <input
             type="email"
@@ -112,7 +98,7 @@ const AddStudent = ({ onAdd }) => {
             required
           />
         </div>
-        <div>
+        <div className="form-group">
           <label>Password</label>
           <input
             type="password"
@@ -122,7 +108,7 @@ const AddStudent = ({ onAdd }) => {
             required
           />
         </div>
-        <div>
+        <div className="form-group">
           <label>Image</label>
           <input
             type="file"
@@ -130,7 +116,7 @@ const AddStudent = ({ onAdd }) => {
             onChange={handleFileChange}
           />
         </div>
-        <div>
+        <div className="form-group">
           <label>Department</label>
           <select
             name="department"
@@ -151,7 +137,7 @@ const AddStudent = ({ onAdd }) => {
             <option value="10">PG-DUASP</option>
           </select>
         </div>
-        <button type="submit">Add Student</button>
+        <button className="submit-button" type="submit">Add Student</button>
       </form>
     </div>
   );

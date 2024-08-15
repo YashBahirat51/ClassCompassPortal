@@ -5,9 +5,11 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+import com.app.security.CustomUser;
+
 @Entity
 @Table(name = "admins")
-public class Admin {
+public class Admin implements CustomUser{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,6 +34,20 @@ public class Admin {
     @NotBlank
     @Size(max = 100)
     private String password;
+
+    @Enumerated(EnumType.STRING)
+    private Role role; // Use the Role enum here
+
+    
+   
+
+	public String getRole() {
+		return role.toString();
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
+	}
 
     // Getters and Setters
     public Long getId() {
@@ -73,4 +89,5 @@ public class Admin {
     public void setPassword(String password) {
         this.password = password;
     }
+
 }

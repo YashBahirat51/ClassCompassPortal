@@ -125,6 +125,7 @@ const AddFaculty = () => {
                             <input
                                 type="text"
                                 name="fname"
+                                class="addF"
                                 value={faculty.fname}
                                 onChange={e => setFaculty({ ...faculty, fname: e.target.value })}
                                 required
@@ -135,6 +136,7 @@ const AddFaculty = () => {
                             <input
                                 type="text"
                                 name="lname"
+                                class="addF"
                                 value={faculty.lname}
                                 onChange={e => setFaculty({ ...faculty, lname: e.target.value })}
                                 required
@@ -145,6 +147,7 @@ const AddFaculty = () => {
                             <input
                                 type="email"
                                 name="email"
+                                class="addF"
                                 value={faculty.email}
                                 onChange={e => setFaculty({ ...faculty, email: e.target.value })}
                                 required
@@ -155,6 +158,7 @@ const AddFaculty = () => {
                             <input
                                 type="password"
                                 name="password"
+                                class="addF"
                                 value={faculty.password}
                                 onChange={e => setFaculty({ ...faculty, password: e.target.value })}
                                 required={!editing}
@@ -164,6 +168,7 @@ const AddFaculty = () => {
                             <label>Subject</label>
                             <select
                                 name="subjectId"
+                                class="addF"
                                 value={faculty.subjectId}
                                 onChange={e => setFaculty({ ...faculty, subjectId: e.target.value })}
                                 required
@@ -178,6 +183,7 @@ const AddFaculty = () => {
                             <label>Department</label>
                             <select
                                 name="department"
+                                class="addF"
                                 value={faculty.department}
                                 onChange={e => setFaculty({ ...faculty, department: e.target.value })}
                                 required

@@ -12,6 +12,7 @@ import com.app.dao.DepartmentRepository;
 import com.app.dao.StudentRepository;
 import com.app.dto.StudentDTO;
 import com.app.entities.Department;
+import com.app.entities.Role;
 import com.app.entities.Student;
 import com.app.mapper.StudentMapper;
 
@@ -26,6 +27,7 @@ public class StudentService {
 	    private StudentMapper studentMapper;
 	
     public Student saveStudent(Student student) {
+    	student.setRole(Role.ROLE_STUDENT);
         return studentRepository.save(student);
     }
     
@@ -163,6 +165,7 @@ public class StudentService {
         student.setLname(lname);
         student.setEmail(email);
         student.setPassword(password);
+        student.setRole(Role.ROLE_STUDENT);
         if (imageBytes != null) {
             student.setImage(imageBytes);
         }
@@ -171,9 +174,7 @@ public class StudentService {
         return studentMapper.toDTO(updatedStudent);
     }
 
-    private StudentDTO convertToDTO(Student student) {
-        return new StudentDTO(student.getPrnno(), student.getFname(), student.getLname(), student.getEmail(), student.getPassword(), student.getImage());
-    }
+  
 
     private Student convertToEntity(StudentDTO studentDTO) {
         return new Student(studentDTO.getPrnno(), studentDTO.getFname(), studentDTO.getLname(), studentDTO.getEmail(), studentDTO.getPassword(), studentDTO.getImage());

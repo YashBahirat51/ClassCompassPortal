@@ -39,5 +39,9 @@ public class DepartmentService {
         
 		return departmentMapper.toDTO(department);
     }
+    public Department getDeptById(Long id)
+    {
+    	return departmentRepository.findById(id).orElseThrow();
+    }
 }
 

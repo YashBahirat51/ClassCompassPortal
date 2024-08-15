@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { createAssignment, getAllAssignments, getAllSubjects, deleteAssignment } from '../../services/assignmnetApi';
+import '../styles/AssignmentsPage.css'
 
 const AssignmentManagementPage = () => {
   const [assignments, setAssignments] = useState([]);
@@ -79,73 +80,75 @@ const AssignmentManagementPage = () => {
   };
 
   return (
-    <div>
-      <h3>Assignment Management</h3>
-      
-      <form onSubmit={handleSubmit}>
-        <div>
-          <input
-            type="text"
-            placeholder="Assignment Name"
-            value={name}
-            onChange={handleNameChange}
-            required
-          />
-        </div>
-        <div>
-          <textarea
-            placeholder="Assignment Question"
-            value={question}
-            onChange={handleQuestionChange}
-            required
-          />
-        </div>
-        <div>
-          <input
-            type="date"
-            placeholder="Deadline"
-            value={deadline}
-            onChange={(e) => setDeadline(e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <select value={subjectId} onChange={(e) => setSubjectId(e.target.value)} required>
-            <option value="" disabled>Select Subject</option>
-            {subjects.map(subject => (
-              <option key={subject.id} value={subject.id}>{subject.name}</option>
-            ))}
-          </select>
-        </div>
-        <button type="submit">Add Assignment</button>
-      </form>
+    <div className="assignment-page">
+      <hr></hr>
+      <div className="assignment-form-container">
+        <h3>Assignment Management</h3>
+        <form className="assignment-form" onSubmit={handleSubmit}>
+          <div className="form-group">
+            <input
+              type="text"
+              placeholder="Assignment Name"
+              value={name}
+              onChange={handleNameChange}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <textarea
+              placeholder="Assignment Question"
+              value={question}
+              onChange={handleQuestionChange}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <input
+              type="date"
+              placeholder="Deadline"
+              value={deadline}
+              onChange={(e) => setDeadline(e.target.value)}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <select value={subjectId} onChange={(e) => setSubjectId(e.target.value)} required>
+              <option value="" disabled>Select Subject</option>
+              {subjects.map(subject => (
+                <option key={subject.id} value={subject.id}>{subject.name}</option>
+              ))}
+            </select>
+          </div>
+          <button type="submit">Add Assignment</button>
+        </form>
+      </div>
 
-      <div>
+      <div className="assignment-table-container">
         <h3>Existing Assignments</h3>
-        <table style={{ width: '100%', borderCollapse: 'collapse', border: '1px solid black' }}>
+        <table>
           <thead>
             <tr>
-              <th style={{ border: '1px solid black', padding: '8px' }}>Assignment Name</th>
-              <th style={{ border: '1px solid black', padding: '8px' }}>Subject</th>
-              <th style={{ border: '1px solid black', padding: '8px' }}>Deadline</th>
-              <th style={{ border: '1px solid black', padding: '8px' }}>Actions</th>
+              <th>Assignment Name</th>
+              <th>Subject</th>
+              <th>Deadline</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
             {assignments.length > 0 ? (
               assignments.map(assignment => (
                 <tr key={assignment.id}>
-                  <td style={{ border: '1px solid black', padding: '8px' }}>{assignment.name}</td>
-                  <td style={{ border: '1px solid black', padding: '8px' }}>{assignment.subjectName ? assignment.subjectName : 'No Subject'}</td>
-                  <td style={{ border: '1px solid black', padding: '8px' }}>{new Date(assignment.deadline).toLocaleDateString()}</td>
-                  <td style={{ border: '1px solid black', padding: '8px' }}>
+                  <td>{assignment.name}</td>
+                  <td>{assignment.subjectName ? assignment.subjectName : 'No Subject'}</td>
+                  <td>{new Date(assignment.deadline).toLocaleDateString()}</td>
+                  <td>
                     <button onClick={() => handleDelete(assignment.id)}>Delete</button>
                   </td>
                 </tr>
               ))
             ) : (
               <tr>
-                <td colSpan="4" style={{ textAlign: 'center', padding: '8px' }}>No assignments available.</td>
+                <td colSpan="4" style={{ textAlign: 'center' }}>No assignments available.</td>
               </tr>
             )}
           </tbody>

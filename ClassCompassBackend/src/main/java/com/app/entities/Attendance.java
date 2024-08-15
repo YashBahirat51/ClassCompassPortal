@@ -11,7 +11,24 @@ public class Attendance {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "file_name", nullable = false)
+    public Attendance() {
+		super();
+	}
+
+	public Attendance(String fileName, String fileType, byte[] data, Department department, Subject subject,
+			LocalDate uploadDate) {
+		super();
+		this.fileName = fileName;
+		this.fileType = fileType;
+		this.data = data;
+		this.department = department;
+		this.subject = subject;
+		this.uploadDate = uploadDate;
+	}
+
+
+
+	@Column(name = "file_name", nullable = false)
     private String fileName;
 
     @Column(name = "file_type", nullable = false)

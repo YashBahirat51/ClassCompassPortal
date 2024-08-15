@@ -25,7 +25,8 @@ const StudentDashboard = () => {
         <div style={{ display: 'flex' }}>
             <StudentSidebar url={url} handleLogout={handleLogout} /> {/* Include the sidebar */}
            <main className="main-content">
-           <h1>student Dashboard</h1>
+           <h1>Student Dashboard</h1>
+           <hr></hr>
            <div style={{ flex: 1, padding: '20px' }}>
                 <Switch>
                     <Route path={`${path}/profile`} component={Profile} />

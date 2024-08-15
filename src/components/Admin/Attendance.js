@@ -32,7 +32,12 @@ const Attendance = () => {
   const fetchAllAttendances = async () => {
     try {
       const response = await axios.get(`${BASE_URL}/api/attendance`);
-      setAttendances(response.data);
+      if (Array.isArray(response.data)) {
+        setAttendances(response.data);
+      } else {
+        console.error('Expected an array but got:', response.data);
+        setAttendances([]);
+      }
     } catch (error) {
       console.error('Failed to fetch attendance:', error);
     }
@@ -93,15 +98,15 @@ const Attendance = () => {
     }
   };
 
-  const filteredAttendances = attendances.filter(attendance =>
+  const filteredAttendances = (Array.isArray(attendances) ? attendances : []).filter(attendance =>
     attendance.fileName.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
-    <div>
+    <div className="attendance-container">
       <h3>Upload Monthly Attendance</h3>
       <form onSubmit={handleSubmit}>
-        <div>
+        <div className="form-group">
           <label>Department:</label>
           <select value={selectedDepartment} onChange={handleDepartmentChange}>
             <option value="">Select Department</option>
@@ -110,7 +115,7 @@ const Attendance = () => {
           </select>
         </div>
         
-        <div>
+        <div className="form-group">
           <label>Subject:</label>
           <select value={selectedSubject} onChange={handleSubjectChange} disabled={!selectedDepartment}>
             <option value="">Select Subject</option>
@@ -120,22 +125,24 @@ const Attendance = () => {
           </select>
         </div>
 
-        <div>
+        <div className="form-group">
           <label>Attendance Name:</label>
           <input type="text" value={attendanceName} onChange={handleNameChange} />
         </div>
 
-        <div>
+        <div className="form-group">
           <label>Attendance File:</label>
           <input type="file" onChange={handleFileChange} />
         </div>
 
-        <button type="submit">Upload Attendance</button>
+        <div className="form-group">
+          <button type="submit">Upload Attendance</button>
+        </div>
       </form>
 
       <h3>Available Attendance Files</h3>
       
-      <div>
+      <div className="search-container">
         <label>Search by File Name:</label>
         <input
           type="text"
@@ -159,7 +166,7 @@ const Attendance = () => {
               <td>{attendance.fileName}</td>
               <td>{attendance.fileType}</td>
               <td>
-                <button onClick={() => handleDeleteAttendance(attendance.id)}>Delete</button>
+                <button className="delete-button" onClick={() => handleDeleteAttendance(attendance.id)}>Delete</button>
               </td>
             </tr>
           ))}

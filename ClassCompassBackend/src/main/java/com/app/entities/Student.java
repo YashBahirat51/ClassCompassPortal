@@ -1,13 +1,31 @@
 package com.app.entities;
 
-import javax.persistence.*;
+import java.util.Collection;
+import java.util.Collections;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+
+import com.app.security.CustomUser;
+
 @Entity
 @Table(name = "students")
-public class Student {
+public class Student implements CustomUser{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,7 +35,20 @@ public class Student {
     @Column(unique = true)
     private String prnno;
 
-    @NotBlank
+    @Enumerated(EnumType.STRING)
+    private Role role; // Use the Role enum here
+
+    
+   
+
+	public String getRole() {
+		return role.toString();
+	}
+	public void setRole(Role role) {
+		this.role = role;
+	}
+
+	@NotBlank
     @Size(min = 2, max = 50)
     private String fname;
 
@@ -112,4 +143,8 @@ public class Student {
     public void setImage(byte[] image) {
         this.image = image;
     }
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return Collections.singletonList(new SimpleGrantedAuthority(role.name()));
+    }
+
 }

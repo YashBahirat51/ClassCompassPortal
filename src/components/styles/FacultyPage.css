@@ -34,9 +34,12 @@
   
   .faculty-form .form-group {
     margin-bottom: 20px;
-    width: 100%; /* Full width of the form */
+    width: 80%; /* Full width of the form */
   }
   
+  .addf{
+    width: 80%;
+  }
   .faculty-form .form-group label {
     display: block;
     margin-bottom: 5px;
@@ -73,6 +76,7 @@
   
   .search-bar {
     margin-bottom: 20px;
+    margin-top: 15px;
     text-align: center;
   }
   

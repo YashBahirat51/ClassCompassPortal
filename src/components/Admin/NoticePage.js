@@ -73,9 +73,7 @@ const NoticePage = () => {
 
   return (
     <div className="notice-page">
-      <button className="back-button" onClick={() => history.push('/dashboard')}>
-        Back to Dashboard
-      </button>
+     
       <div className="notice-form">
         <h1>Notice Registration</h1>
         <form onSubmit={handleSubmit}>

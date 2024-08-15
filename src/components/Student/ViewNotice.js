@@ -23,9 +23,7 @@ const ViewNotice = () => {
 
   return (
     <div className="view-notice-page">
-      <button className="back-button" onClick={() => history.push('/dashboard')}>
-        Back to Dashboard
-      </button>
+      
       <div className="notice-list">
         <h2>Notices for {userDepartment}</h2>
         <div className="search-bar">

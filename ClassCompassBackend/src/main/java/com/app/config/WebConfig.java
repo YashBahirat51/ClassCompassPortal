@@ -16,12 +16,27 @@ public class WebConfig implements WebMvcConfigurer {
 //                .allowedHeaders("*")
 //                .allowCredentials(true);
 //    }
+//    @Override
+//    public void addCorsMappings(CorsRegistry registry) {
+//        registry.addMapping("/**")
+//                .allowedOrigins("http://localhost:3000") // Allow requests from this origin
+//                .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+//                .allowedHeaders("*");
+//    }
+//	@Override
+//    public void addCorsMappings(CorsRegistry registry) {
+//        registry.addMapping("/**")
+//                .allowedOrigins("http://localhost:3000")
+//                .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+//                .allowedHeaders("*")
+//                .allowCredentials(true);
+//    }
 	@Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/api/**")
-                .allowedOrigins("http://localhost:3000")
-                .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
-                .allowedHeaders("*")
+        registry.addMapping("/**")
+        .allowedOrigins("http://localhost:3000") // Adjust according to your frontend URL
+        .allowedOrigins("http://localhost:3001") // Adjust according to your frontend URL
+        .allowedMethods("*")
                 .allowCredentials(true);
     }
 }
