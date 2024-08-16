@@ -15,8 +15,8 @@ const StudentSidebar = ({ url, handleLogout }) => {
         
         <li><Link to={`${url}/viewresult`}>View Result</Link></li>
         <li><Link to={`${url}/resources`}>View Resources</Link></li>
-        <li><Link to={`${url}/assignments`}>Assignments</Link></li>
-        <li><Link to={`${url}/attendance`}>Attendance</Link></li>
+        <li><Link to={`${url}/assignments`}>View Assignments</Link></li>
+        <li><Link to={`${url}/attendance`}>View Attendance</Link></li>
         <li><button onClick={handleLogout}>Logout</button></li>
           
       </ul>

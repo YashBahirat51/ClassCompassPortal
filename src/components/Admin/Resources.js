@@ -12,6 +12,7 @@ const Resource = () => {
   const [resourceName, setResourceName] = useState('');
   const [resources, setResources] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
+  const [error, setError] = useState('');
 
   useEffect(() => {
     if (selectedDepartment) {
@@ -33,9 +34,17 @@ const Resource = () => {
   const fetchAllResources = async () => {
     try {
       const response = await axios.get(`${BASE_URL}/api/resources`);
-      setResources(response.data);
+      // Ensure response.data is an array
+      if (Array.isArray(response.data)) {
+        setResources(response.data);
+      } else {
+        console.warn('Unexpected response format for resources:', response.data);
+        setResources([]);
+      }
     } catch (error) {
       console.error('Failed to fetch resources:', error);
+      setResources([]);
+      setError('Failed to fetch resources.');
     }
   };
 
@@ -94,13 +103,14 @@ const Resource = () => {
     }
   };
 
-  const filteredResources = resources.filter(resource =>
+  // Ensure resources is always an array before filtering
+  const filteredResources = Array.isArray(resources) ? resources.filter(resource =>
     resource.fileName.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  ) : [];
 
   return (
     <div className="resource-page">
-      <hr></hr>
+      <hr />
       <div className="resource-form-container">
         <h3>Upload Resource</h3>
         
@@ -150,26 +160,32 @@ const Resource = () => {
           />
         </div>
         
-        <table>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Type</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredResources.map(resource => (
-              <tr key={resource.id}>
-                <td>{resource.fileName}</td>
-                <td>{resource.fileType}</td>
-                <td>
-                  <button onClick={() => handleDeleteResource(resource.id)}>Delete</button>
-                </td>
+        {Array.isArray(resources) && resources.length > 0 ? (
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Actions</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {filteredResources.map(resource => (
+                <tr key={resource.id}>
+                  <td>{resource.fileName}</td>
+                  <td>{resource.fileType}</td>
+                  <td>
+                    <button onClick={() => handleDeleteResource(resource.id)}>Delete</button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        ) : (
+          <p>No resources available.</p>
+        )}
+
+        {error && <p className="error">{error}</p>}
       </div>
     </div>
   );

@@ -29,6 +29,12 @@ const App = () => (
             <PrivateRoute path="/faculty/add-assignment" component={AddAssignment} />
             <PrivateRoute path="/faculty/notice" component={NoticePage} />
 
+            {/* Student Routes */}
+            <PrivateRoute path="/student/dashboard" component={StudentDashboard} />
+            <PrivateRoute path="/student/upload-assignment" component={UploadAssignment} />
+            <PrivateRoute path="/student/profile" component={Profile} />
+            <PrivateRoute path="/student/resources" component={ViewResources} />
+            <PrivateRoute path="/student/timetable" component={ViewTimetable} />
             <PrivateRoute path="/student/assignments" component={Assignments} />
             <PrivateRoute path="/student/notice" component={NoticePage} />
             <PrivateRoute path="/student/attendance" component={ViewAttendance} />
