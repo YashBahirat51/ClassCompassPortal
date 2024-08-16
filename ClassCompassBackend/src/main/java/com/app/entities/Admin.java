@@ -20,7 +20,17 @@ public class Admin implements CustomUser{
     @Column(name = "first_name")
     private String fname;
 
-    @NotBlank
+    public Admin(String fname,String lname,
+			@Email String email,String password, Role role) {
+		super();
+		this.fname = fname;
+		this.lname = lname;
+		this.email = email;
+		this.password = password;
+		this.role = role;
+	}
+
+	@NotBlank
     @Size(max = 50)
     @Column(name = "last_name")
     private String lname;

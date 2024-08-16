@@ -14,7 +14,6 @@ const PrivateRoute = ({ component: Component, adminOnly, ...rest }) => {
                     (adminOnly && role === 'admin') ||
                     (!adminOnly && (
                         (role === 'admin' && rest.path.startsWith('/admin')) ||
-                        (role === 'faculty' && rest.path.startsWith('/faculty')) ||
                         (role === 'student' && rest.path.startsWith('/student'))
                     )) ? (
                         <Component {...props} />
@@ -22,7 +21,7 @@ const PrivateRoute = ({ component: Component, adminOnly, ...rest }) => {
                         <Redirect to={`/${role}/login`} />
                     )
                 ) : (
-                    <Redirect to="/login" />
+                    <Redirect to="/" />
                 )
             }
         />

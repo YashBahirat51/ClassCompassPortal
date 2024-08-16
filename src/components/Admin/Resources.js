@@ -185,6 +185,9 @@ const Resource = () => {
           <p>No resources available.</p>
         )}
 
+
+
+
         {error && <p className="error">{error}</p>}
       </div>
     </div>
