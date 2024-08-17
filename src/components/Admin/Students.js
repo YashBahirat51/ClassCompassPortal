@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+  import React, { useState, useEffect } from 'react';
 import { Route, Switch, useRouteMatch } from 'react-router-dom';
 import AddStudent from './AddStudent';
 import { deleteStudent, getAllStudents, updateStudent } from '../../services/studentApi';
@@ -21,9 +21,9 @@ const Students = () => {
     fetchStudents();
   }, []);
 
-  const fetchStudents = async () => {
+  const fetchStudents =  () => {
     try {
-      const data = await getAllStudents();
+      const data =  getAllStudents();
       setStudents(data);
     } catch (error) {
       console.error('Failed to fetch students:', error);

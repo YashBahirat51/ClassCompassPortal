@@ -6,4 +6,5 @@ import com.app.entities.Department;
 
 public interface DepartmentRepository extends JpaRepository<Department, Long> {
 
+	public Department findByName(String name);
 }

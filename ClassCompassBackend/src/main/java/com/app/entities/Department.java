@@ -23,7 +23,11 @@ public class Department {
 	    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	    private Long id;
 
-	    @NotBlank
+	    public Department() {
+		super();
+	}
+
+		@NotBlank
 	    private String name;
 
 	    @NotBlank
@@ -40,7 +44,14 @@ public class Department {
 	    @JsonIgnore // Avoid serializing faculties
 	    private Set<Faculty> faculties;
 
-    // Getters and Setters
+    public Department(String name, String head) {
+	
+    	this.name=name;
+    	this.head=head;
+    	
+    }
+
+	// Getters and Setters
     public Long getId() {
         return id;
     }

@@ -20,8 +20,18 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Table(name = "subjects")
 public class Subject {
 
-    public Set<Resource> getResources() {
+    public Subject(String string, Department dept) {
+		// TODO Auto-generated constructor stub
+    	this.name=name;
+    	this.department=dept;
+	}
+
+	public Set<Resource> getResources() {
 		return resources;
+	}
+
+	public Subject() {
+		super();
 	}
 
 	public void setResources(Set<Resource> resources) {

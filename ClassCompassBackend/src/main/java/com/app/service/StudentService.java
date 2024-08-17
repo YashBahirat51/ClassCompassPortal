@@ -2,6 +2,7 @@ package com.app.service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.hibernate.validator.constraints.UniqueElements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -96,7 +97,7 @@ public class StudentService {
 //        Student savedStudent = studentRepository.save(student);
 //        return studentMapper.toDTO(savedStudent);
 //    }
-    public StudentDTO addStudent(String prnno, String fname, String lname, String email, String password, Long department, byte[] image) {
+    public StudentDTO addStudent(@UniqueElements String prnno, String fname, String lname, String email, String password, Long department, byte[] image) {
         // Create a new Student entity
         Student student = new Student();
         student.setPrnno(prnno);
@@ -107,7 +108,7 @@ public class StudentService {
         //departmentRepository.findById(department);
         student.setDepartment(departmentRepository.findById(department).orElseThrow()); 
         student.setImage(image);
-
+        student.setRole(Role.ROLE_STUDENT);
         // Save the student entity
         Student savedStudent = studentRepository.save(student);
 
